@@ -1,5 +1,6 @@
-
-def calculate_progressive_tax(number: float, lower_brackets: dict[int, float], deduction: float):
+def calculate_progressive_tax(
+    number: float, lower_brackets: dict[int, float], deduction: float
+):
     number = max(number - deduction, 0)
     upper_brackets = create_upper_bounds(lower_brackets)
     total = 0
@@ -11,6 +12,7 @@ def calculate_progressive_tax(number: float, lower_brackets: dict[int, float], d
             break
         prior_amount = amount
     return int(total)
+
 
 def create_upper_bounds(brackets: dict[int, float]):
     upper_brackets = {}

@@ -1,10 +1,13 @@
 """Service file for computing the total cost of living somewhere."""
+
 from services.taxes import get_all_taxes
 from util.local import City
 from util.state import Quality, State, get_rent, state_specific_expenses
 
 
-def get_total(salary: int, state: str, exemptions: int, quality: str, k: int, city: City):
+def get_total(
+    salary: int, state: str, exemptions: int, quality: str, k: int, city: City
+):
     """Get the total cost for living in a state given the parameters."""
     state = state.lower()
     after_401k = salary - k

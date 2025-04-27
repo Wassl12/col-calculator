@@ -11,7 +11,7 @@ california_tax_brackets = {
     70607: 0.093,
     360660: 0.103,
     432788: 0.113,
-    721315: 0.123
+    721315: 0.123,
 }
 
 new_york_tax_brackets = {
@@ -24,7 +24,7 @@ new_york_tax_brackets = {
     215401: 0.0685,
     1077551: 0.0965,
     5000001: 0.103,
-    25000001: 0.109
+    25000001: 0.109,
 }
 
 ny_standard_deduction = 8000
@@ -32,10 +32,12 @@ ny_standard_deduction = 8000
 california_standard_deduction_2024 = 5540
 california_state_personal_exemption_2024 = 149
 
+
 class State(Enum):
     TEXAS = "texas"
     CALIFORNIA = "california"
     NEW_YORK = "new york"
+
 
 class Quality(Enum):
     LOW = "low"
@@ -43,25 +45,26 @@ class Quality(Enum):
     HIGH = "high"
     EXTREME = "extreme"
 
+
 CALIFORNIA_RENT = {
     Quality.LOW: 2000,
     Quality.MEDIUM: 2700,
     Quality.HIGH: 3300,
-    Quality.EXTREME: 4000
+    Quality.EXTREME: 4000,
 }
 
 TEXAS_RENT = {
     Quality.LOW: 900,
     Quality.MEDIUM: 1300,
     Quality.HIGH: 1600,
-    Quality.EXTREME: 2000
+    Quality.EXTREME: 2000,
 }
 
 NEW_YORK_RENT = {
     Quality.LOW: 2000,
     Quality.MEDIUM: 3000,
     Quality.HIGH: 4000,
-    Quality.EXTREME: 4800
+    Quality.EXTREME: 4800,
 }
 
 
@@ -69,11 +72,17 @@ def calculate_state_income_tax(number: int, state: State, exemptions: int = 1) -
     if state == State.TEXAS:
         return 0
     if state == State.CALIFORNIA:
-        return calculate_progressive_tax(number - california_state_personal_exemption_2024 * exemptions, california_tax_brackets, california_standard_deduction_2024)
+        return calculate_progressive_tax(
+            number - california_state_personal_exemption_2024 * exemptions,
+            california_tax_brackets,
+            california_standard_deduction_2024,
+        )
     if state == State.NEW_YORK:
-        return calculate_progressive_tax(number - 0 * exemptions, new_york_tax_brackets, ny_standard_deduction) # idk the state p exemption
+        return calculate_progressive_tax(
+            number - 0 * exemptions, new_york_tax_brackets, ny_standard_deduction
+        )  # idk the state p exemption
 
-    
+
 def state_specific_expenses(quality: Quality, state: State):
     groceries = 3000
     eat_out = 3000
@@ -90,8 +99,6 @@ def state_specific_expenses(quality: Quality, state: State):
         return (groceries + eat_out + gas + insurance + electricity + travel) * 1.3
 
 
-    
-
 def get_rent(quality: Quality, state: State):
     if state == State.TEXAS:
         return TEXAS_RENT[quality] * 12
@@ -99,5 +106,3 @@ def get_rent(quality: Quality, state: State):
         return CALIFORNIA_RENT[quality] * 12
     if state == State.NEW_YORK:
         return NEW_YORK_RENT[quality] * 12
-    
-

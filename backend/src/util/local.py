@@ -1,12 +1,9 @@
-from util.progressive_tax import calculate_progressive_tax
 from enum import Enum
 
-nyc_tax_brackets = {
-    0: 0.03078,
-    12000: 0.03762,
-    25000: 0.03819,
-    50000: 0.03876
-}
+from util.progressive_tax import calculate_progressive_tax
+
+nyc_tax_brackets = {0: 0.03078, 12000: 0.03762, 25000: 0.03819, 50000: 0.03876}
+
 
 class City(Enum):
     NYC = "nyc"
